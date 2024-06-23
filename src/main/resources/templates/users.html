@@ -13,6 +13,10 @@
             <input type="text" id="username" th:field="*{username}" required />
         </div>
         <div class="form-group">
+            <label for="userage">Возраст пользователя</label>
+            <input type="text" id="userage" th:field="*{userage}" required />
+        </div>
+        <div class="form-group">
             <label for="dailyCalorieLimit">Дневная норма калорийности</label>
             <input type="number" id="dailyCalorieLimit" th:field="*{dailyCalorieLimit}" required />
         </div>
@@ -22,6 +26,7 @@
         <thead>
         <tr>
             <th>Имя пользователя</th>
+            <th>Возраст пользователя</th>
             <th>Дневная норма калорийности</th>
             <th>Действия</th>
         </tr>

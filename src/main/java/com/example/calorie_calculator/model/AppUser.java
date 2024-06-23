@@ -36,6 +36,9 @@ public class AppUser {
     private String username;
 
     @Column
+    private Integer age;
+
+    @Column
     private int dailyCalorieLimit;
 
     @Column
