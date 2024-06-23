@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Детали пользователя</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<div class="container">
+    <h1>Детали пользователя: <span th:text="${user.username}">Имя пользователя</span></h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Дата</th>
+            <th>Продукт</th>
+            <th>Количество (г)</th>
+            <th>Потреблено калорий</th>
+            <th>Потреблено белков</th>
+            <th>Потреблено жиров</th>
+            <th>Потреблено углеводов</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="consumption : ${dailyConsumptions}">
+            <td th:text="${consumption.date}">Дата</td>
+            <td th:text="${consumption.product.name}">Продукт</td>
+            <td th:text="${consumption.quantity}">Количество (г)</td>
+            <td th:text="${consumption.getCalories()}">Потреблено калорий</td>
+            <td th:text="${consumption.getProteins()}">Потреблено белков</td>
+            <td th:text="${consumption.getFats()}">Потреблено жиров</td>
+            <td th:text="${consumption.getCarbohydrates()}">Потреблено углеводов</td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/users/all}">Назад к списку пользователей</a>
+
+    <h2>Добавить новое потребление</h2>
+    <form action="#" th:action="@{|/users/detail/add/${user.id}|}" th:object="${newConsumption}" method="post">
+        <!-- Передаем идентификатор пользователя -->
+        <input type="hidden" th:field="*{user.id}" th:value="${user.id}" />
+        <div class="form-group">
+            <label for="product">Продукт</label>
+            <select id="product" th:field="*{product.id}">
+                <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}">Продукт</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="quantity">Количество (г)</label>
+            <input type="number" id="quantity" th:field="*{quantity}" required />
+        </div>
+        <div class="form-group">
+            <label for="date">Дата</label>
+            <input type="date" id="date" th:field="*{date}" required />
+        </div>
+        <button type="submit" class="btn-submit">Добавить потребление</button>
+    </form>
+</div>
+</body>
+</html>

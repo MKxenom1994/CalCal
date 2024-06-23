@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Потребления</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<div class="container">
+    <h1>Потребления</h1>
+    <form action="#" th:action="@{/consumptions/add}" th:object="${consumption}" method="post">
+        <div class="form-group">
+            <label for="user">Пользователь</label>
+            <select id="user" th:field="*{user}">
+                <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}">Пользователь</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="product">Продукт</label>
+            <select id="product" th:field="*{product}">
+                <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}">Продукт</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="quantity">Количество (граммы)</label>
+            <input type="number" id="quantity" th:field="*{quantity}" required />
+        </div>
+        <div class="form-group">
+            <label for="date">Дата</label>
+            <input type="date" id="date" th:field="*{date}" required />
+        </div>
+        <button type="submit" class="btn-submit">Добавить потребление</button>
+    </form>
+    <table>
+        <thead>
+        <tr>
+            <th>Пользователь</th>
+            <th>Продукт</th>
+            <th>Количество (граммы)</th>
+            <th>Дата</th>
+            <th>Калории</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="consumption : ${consumptions}">
+            <td th:text="${consumption.user.username}">Пользователь</td>
+            <td th:text="${consumption.product.name}">Продукт</td>
+            <td th:text="${consumption.quantity}">Количество (граммы)</td>
+            <td th:text="${consumption.date}">Дата</td>
+            <td th:text="${consumption.calories}">Калории</td>
+            <td>
+                <a th:href="@{/consumptions/edit/{id}(id=${consumption.id})}">Изменить</a>
+                <a th:href="@{/consumptions/delete/{id}(id=${consumption.id})}">Удалить</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/}">Домой</a>
+</div>
+</body>
+</html>
