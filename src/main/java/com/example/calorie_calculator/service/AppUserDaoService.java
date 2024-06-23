@@ -54,6 +54,7 @@ public class AppUserDaoService implements AppUserDao {
                 .findFirst()
                 .orElseThrow(() -> new ResourceNotFoundException(USER_NOT_FOUND_MSG + id));
         user.setUsername(userDetails.getUsername());
+        user.setAge(userDetails.getAge());
         user.setDailyCalorieLimit(userDetails.getDailyCalorieLimit());
         user.setDailyProteinsLimit(userDetails.getDailyProteinsLimit());
         user.setDailyFatesLimit(userDetails.getDailyFatesLimit());
